@@ -9,6 +9,7 @@ import {
 import { Welcome } from './Components/Welcome';
 import { CallbackRoute } from './Components/CallBack';
 import { SignIn } from './Components/SignIn';
+import {OopsPage} from './Components/OopsPage'
 
 const router = createBrowserRouter([
   {
@@ -27,7 +28,11 @@ const router = createBrowserRouter([
   {
     path : "/Welcome",
     element : <Welcome />
-  }
+  },
+  {
+    path : "/Opps",
+    element : <OopsPage />
+  },
 ]);
 
 const root = ReactDOM.createRoot(document.getElementById('root'));

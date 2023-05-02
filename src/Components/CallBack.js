@@ -1,29 +1,62 @@
-import {Redirect} from 'react'
-import { useSearchParams } from "react-router-dom";
+import {Redirect,useState,useEffect } from 'react'
+import { useSearchParams, redirect ,useNavigate  } from "react-router-dom";
 import { Welcome } from './Welcome';
+import axios from 'axios'
+
 
 
 
 export function CallbackRoute() {
+    var [token, settoken] = useState()
+    var [expiry, setexpiry] = useState()
+    var [tokentype, settokentype] = useState()
+    var [res ,setres] = useState(null)
+    const navigate  = useNavigate ();
+
     //const [searchParams] = useSearchParams();
     const searchParams = new URLSearchParams(window.location.href)
     console.log(searchParams);
-    const access_token = searchParams.get("access_token")
+    var t = searchParams.get("access_token")
+    setexpiry = searchParams.get("expires_in")
+    settokentype = searchParams.get("token_type")
 
-    // const location = useLocation();
-    // const searchParams = new URLSearchParams(location.search);
-    
-    // const access_token = searchParams.get('access_token');
-    sessionStorage.setItem('access_token', access_token);
+   //saving
+    sessionStorage.setItem('access_token', t);
+  
+    //calling server to save the token in the cache 
+    var data = {
+        access_token : t,
+        //Expiry : setexpiry,
+        token_type : settokentype    
+    }
 
-    console.debug(access_token);
-    
-  
-    // Save the query parameters to state or sessionStorage
-    // ...
-  
-    // Redirect to the welcome page
-    return <Welcome />;
+    //useEffect(() =>{ 
+       axios.post('http://localhost:9005/api/User/v1/Signin', JSON.stringify(data),{
+        headers: {
+            'Content-Type': 'application/json',
+         },
+    })
+      .then(response => {
+        console.log(response.data);
+        if (response.data.status == true) {
+            navigate('/Welcome');
+        }
+      })
+      .catch(error => {
+        console.error(error);
+        navigate('/Oops');
+      });
+
+      //setres(mydata);
+    //},[]);
+
+    navigate('/Welcome');
+
+    // if(res.data.status){
+    //     return redirect("/Welcome");
+    // }else{
+    //     return redirect("/Oops")
+    // }
   }
   
   
