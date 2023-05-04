@@ -6,21 +6,19 @@ import {
     Select,
    } from 'antd'
 import axios from 'axios'
+import {newDt} from './newDt'
+import { DataGrid } from './DataGrid';
 
-
-    
-
-    export function FetchRaw (){
+export function FetchRaw (){
     const { RangePicker } = DatePicker;
     const options = { year: 'numeric', month: '2-digit', day: '2-digit' };
     const [dates, setDates] = useState(null);
     const [value, setValue] = useState(null);
     const [label,setlabel] = useState (null);
+    const [fetched,setfetched] = useState(false);
 
-    // const [toDate, setToDate]= useState(new Date());//toLocaleDateString('en-CA', options)); // Set default value to today's date
-    // const [fromDate, setFromDate]  = useState(new Date(new Date().getTime() - 7 * 24 * 60 * 60 * 1000)); // Set default value to 7 days ago
-  
-    //fucntion for disbaling other dates
+    const [data,setdata] = useState([])
+
     const disabledDate = (current) => {
       if (!dates) {
         return false;
@@ -59,11 +57,17 @@ import axios from 'axios'
          },        
     })
     .then(response => {
-        console.log(response.data);})
+        console.log(response.data);
+        if (response.status == 200) {
+            setfetched(true)
+            setdata(response.data)
+
+        }
+    })
         .catch(error => console.error(error));
+        setfetched(true)
     };
 
-    //returning div 
     return (
     <div>
     <Form >
@@ -88,9 +92,8 @@ import axios from 'axios'
             <Button onClick={handleSubmit}>Fetch</Button>
         </Form.Item>
     </Form>
-
-
-    
+    <DataGrid isfetched = {fetched} data = {data}/>
+    {/* <newDt /> */}
     </div>
       );
 }

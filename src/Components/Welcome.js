@@ -1,7 +1,8 @@
-import { FetchRaw } from "./FetchRaw";
+import { FetchRaw } from "./FetchTxns/FetchComponent";
 import SyncMailForm from "./SyncMailForm";
 import UserProfile from "./UserProfile";
-import { Collapse } from 'antd';
+import {DataGrid} from './FetchTxns/DataGrid';
+import {Collapse} from 'antd';
 
 const { Panel } = Collapse;
 
@@ -32,7 +33,7 @@ export function Welcome() {
 <UserProfile/>
 <Collapse >
       <Panel header="Fetch raw Transactions" key="1">
-      <FetchRaw />
+      <FetchRaw />   
       </Panel>
       <Panel header="Sync Mail" key="2">
       <SyncMailForm />
