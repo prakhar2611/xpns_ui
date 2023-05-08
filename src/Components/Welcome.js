@@ -1,15 +1,59 @@
-import { FetchRaw } from "./FetchRaw";
-import SyncMailForm from "./SyncMailForm";
+import { FetchRaw } from "./FetchTxns/FetchComponent";
+import UserProfile from "./WelcomePage/UserProfile";
+import {DataGrid} from './FetchTxns/DataGrid';
+import {Collapse,Space, Col, Row} from 'antd';
+
+const { Panel } = Collapse;
+
 
 export function Welcome() {
     // Retrieve the query parameters from state or sessionStorage
     // ...
-  
+    // axios.Get('http://localhost:9005/api/User/v1/GetUserProfile',{
+    //     headers: {
+    //         'Content-Type': 'application/json',
+            
+    //      },
+    // })
+    //   .then(response => {
+    //     console.log(response.data);
+    //     if (response.data.status == true) {
+    //         navigate('/Welcome');
+    //     }
+    //   })
+    //   .catch(error => {
+    //     console.error(error);
+    //     navigate('/Oops');
+    //   });
+
+
+
     return (
-     <div>
-      <FetchRaw />
-      <SyncMailForm />
-     </div>
+      <Row >
+    <Col xs={{ span: 5, offset: 1 }}>
+    <Row style ={{ background: '#16A085',
+  padding: '8px 0'}} xs={{span : 3}} > <UserProfile/></Row>
+
+
+    </Col>
+    <Col style = {{ background: '#F9F9F9',
+  padding: '8px 0'}} xs={{ span: 13, offset: 2 }}>
+    <FetchRaw />  
+    </Col>
+    
+  </Row>
+
+    //  <div className="center">
+    //    <UserProfile/>
+    //   <Collapse >
+    //   <Panel header="Fetch raw Transactions" key="1">
+    //   <FetchRaw />   
+    //   </Panel>
+    //   {/* <Panel header="Sync Mail" key="2">
+    //   <SyncMailForm />
+    //   </Panel> */}
+    // </Collapse>
+  // </div>
     );
   }
 

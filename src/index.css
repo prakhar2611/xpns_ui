@@ -11,3 +11,13 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.Row{
+  background: '#0092ff';
+  padding: '8px 0';
+}
+
+.Col{
+  background: '#0092ff';
+  padding: '8px 0';
+}
