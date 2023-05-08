@@ -7,8 +7,8 @@ import {
   RouterProvider,
 } from "react-router-dom";
 import { Welcome } from './Components/Welcome';
-import { CallbackRoute } from './Components/CallBack';
-import { SignIn } from './Components/SignIn';
+import { CallbackRoute } from './Components/GoogleSingIn/CallBack';
+import { SignIn } from './Components/GoogleSingIn/SignIn';
 import {OopsPage} from './Components/OopsPage'
 
 const router = createBrowserRouter([
@@ -30,7 +30,7 @@ const router = createBrowserRouter([
     element : <Welcome />
   },
   {
-    path : "/Opps",
+    path : "/OopsPage",
     element : <OopsPage />
   },
 ]);

@@ -1,4 +1,4 @@
-import { Avatar, Space,Card  } from 'antd';
+import { Avatar, Space,Card,Row  } from 'antd';
 //import { UserOutlined } from '@ant-design/icons';
 import { useState } from 'react';
 import {useNavigate} from "react-router-dom";
@@ -34,17 +34,18 @@ function UserProfile() {
       });
 
     return (
-    <div>
-    <Space direction="vertical" size={20}>
+    <div className='center'>
+       <Space direction="vertical" size={'xs'}>
     <Avatar size={80} src={picture} />
-    </Space>
-    <Card title={name} bordered={false} style={{ width: 300 }}>
+    <div className='center'></div>
+    <Card  title={name} bordered={false} >
     <p>{email}</p>
     <p>Welcome to dashboard. You can manage your expenses here. </p>
   </Card>
-  </div>
+  </Space></div>
    
   
+   
        );
 }
 

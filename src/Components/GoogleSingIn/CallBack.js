@@ -1,6 +1,6 @@
 import {Redirect,useState,useEffect } from 'react'
 import { useSearchParams, redirect ,useNavigate  } from "react-router-dom";
-import { Welcome } from './Welcome';
+import { Welcome } from '../Welcome';
 import axios from 'axios'
 
 

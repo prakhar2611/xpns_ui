@@ -12,3 +12,12 @@ code {
     monospace;
 }
 
+.Row{
+  background: '#0092ff';
+  padding: '8px 0';
+}
+
+.Col{
+  background: '#0092ff';
+  padding: '8px 0';
+}

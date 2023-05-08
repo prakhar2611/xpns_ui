@@ -10,12 +10,18 @@ import {useNavigate} from 'react-router-dom'
 
 export function DataGrid({isfetched,data}) {
     // for(int i =0; i<length(data) ;)
+    // var i
+    // for(i=0; i < data.length; i++){
+    //    data.key = i+1
+    // }
 
     //const [tableData, setTableData] = useState(data);
-    var [payload,setpayload] = useState([])
+    var [payload,setpayload] = useState({})
     const [loadings, setLoadings] = useState([]);
+    const [disable,setdisable] = useState(true); 
 
     const navigate  = useNavigate ();
+     
     
     const onConfirm = (index) => {
 
@@ -33,10 +39,14 @@ export function DataGrid({isfetched,data}) {
               });
             }, 6000);
 
-        console.log(payload);
+       
         //calling server to update the category
         var token = sessionStorage.getItem('access_token');
-        axios.post('http://localhost:9005/expense/api/v1/Update', JSON.stringify(payload),{
+        const p = {
+            'data' : payload
+        }
+        console.log("update payload :",p);
+        axios.post('http://localhost:9005/expense/api/v1/Update', JSON.stringify(p),{
             headers: {
                 'Content-Type': 'application/json',
                 'token' :  token
@@ -49,19 +59,23 @@ export function DataGrid({isfetched,data}) {
           })
           .catch(error => {
             console.error(error);
-            navigate('/Oops');
+            navigate('/OopsPage');
           });     
     };
 
     const onInputChange = (key, index,value) => {
+        
+        // payload.get
 
-        var d = {
-            msgId : index,
-            category : value
-        }
-        var y = [...payload]
-        y.push(d)
+        // var d = {
+        //     msgId : index,
+        //     category : value
+        // }
+        var y = payload
+        y[index] = value
+        // y.push(d)
         setpayload(y)
+        setdisable(false)
 
         console.log("payload data :" , payload)
 
@@ -73,6 +87,9 @@ export function DataGrid({isfetched,data}) {
         // setTableData(newData);
       };
 
+      const getDeafaultvalue=(category) => {
+        return category
+      }
 
     const columns = [
         {
@@ -106,12 +123,15 @@ export function DataGrid({isfetched,data}) {
         dataIndex : 'category',
         key: 'category',
           render: (_, record) => (
-            <Select defaultValue={{}} style={{display: 'flex'}} onChange={(value) => onInputChange("category", record.msgId,value)}>
+            <Select defaultValue={record.category} style={{display: 'flex'}} onChange={(value) => onInputChange("category", record.msgId,value)}>
+                 <Select.Option value="Swiggy">Swiggy</Select.Option>
                 <Select.Option value="Instamart">Instamart</Select.Option>
                 <Select.Option value="Store">Store</Select.Option>
                 <Select.Option value="DineOut">DineOut</Select.Option>
                 <Select.Option value="Stuff">Stuff</Select.Option>
                 <Select.Option value="Subscription">Subscription</Select.Option>
+                <Select.Option value="Liqour">Liqour</Select.Option>
+
                 </Select>
             // <Input value={text} onChange={onInputChange("goals", index)} />
           )
@@ -124,8 +144,7 @@ export function DataGrid({isfetched,data}) {
       return (
     <div>
         <Table columns={columns} dataSource={data} rowKey={record => record.key}/>
-       
-        <Button type="primary" loading={loadings[0]} onClick={() => onConfirm(0)}>
+        <Button type="primary" disabled={disable} loading={loadings[0]} onClick={() => onConfirm(0)}>
             Submit
         </Button>
     </div>

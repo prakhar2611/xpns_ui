@@ -1,10 +1,11 @@
 import { FetchRaw } from "./FetchTxns/FetchComponent";
 import SyncMailForm from "./SyncMailForm";
-import UserProfile from "./UserProfile";
+import UserProfile from "./WelcomePage/UserProfile";
 import {DataGrid} from './FetchTxns/DataGrid';
-import {Collapse} from 'antd';
+import {Collapse,Space, Col, Row} from 'antd';
 
 const { Panel } = Collapse;
+
 
 export function Welcome() {
     // Retrieve the query parameters from state or sessionStorage
@@ -29,21 +30,31 @@ export function Welcome() {
 
 
     return (
-     <div class="center">
-<UserProfile/>
-<Collapse >
-      <Panel header="Fetch raw Transactions" key="1">
-      <FetchRaw />   
-      </Panel>
-      <Panel header="Sync Mail" key="2">
-      <SyncMailForm />
-      </Panel>
-    </Collapse>
+      <Row >
+    <Col xs={{ span: 5, offset: 1 }}>
+    <Row style ={{ background: '#16A085',
+  padding: '8px 0'}} xs={{span : 3}} > <UserProfile/></Row>
 
-      
-      
-      
-     </div>
+
+    </Col>
+    <Col style = {{ background: '#F9F9F9',
+  padding: '8px 0'}} xs={{ span: 13, offset: 2 }}>
+    <FetchRaw />  
+    </Col>
+    
+  </Row>
+
+    //  <div className="center">
+    //    <UserProfile/>
+    //   <Collapse >
+    //   <Panel header="Fetch raw Transactions" key="1">
+    //   <FetchRaw />   
+    //   </Panel>
+    //   {/* <Panel header="Sync Mail" key="2">
+    //   <SyncMailForm />
+    //   </Panel> */}
+    // </Collapse>
+  // </div>
     );
   }
 
