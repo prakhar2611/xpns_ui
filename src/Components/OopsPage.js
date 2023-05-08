@@ -1,4 +1,3 @@
-import SyncMailForm from "./SyncMailForm";
 import { useSearchParams, redirect  } from "react-router-dom";
 import {useNavigate} from 'react-router-dom'
 

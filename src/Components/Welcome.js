@@ -1,5 +1,4 @@
 import { FetchRaw } from "./FetchTxns/FetchComponent";
-import SyncMailForm from "./SyncMailForm";
 import UserProfile from "./WelcomePage/UserProfile";
 import {DataGrid} from './FetchTxns/DataGrid';
 import {Collapse,Space, Col, Row} from 'antd';
