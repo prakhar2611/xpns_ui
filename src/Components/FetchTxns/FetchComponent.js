@@ -7,7 +7,6 @@ import {
     Space,
     Radio
    } from 'antd'
-   import moment from 'moment'
    import axios from 'axios'
 import { DataGrid } from './DataGrid';
 
@@ -148,7 +147,7 @@ export function FetchRaw (){
     
 
     return (
-    <div className='center'>
+    <div >
         <h1>Fetch you transactions </h1>
     <Form >
             <Form.Item label="Account">

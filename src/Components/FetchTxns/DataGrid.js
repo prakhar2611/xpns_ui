@@ -1,5 +1,5 @@
 
-import { Space, Table,Button, Tag,Select } from 'antd';
+import { Space, Table,Button, Tag,Select,Input } from 'antd';
 import { useState, useEffect } from "react";
 import { ColumnProps } from "antd/lib/table";
 import axios from 'axios'
@@ -64,15 +64,21 @@ export function DataGrid({isfetched,data}) {
     };
 
     const onInputChange = (key, index,value) => {
-        
-        // payload.get
-
-        // var d = {
-        //     msgId : index,
-        //     category : value
-        // }
         var y = payload
-        y[index] = value
+
+        // payload.get
+        if (index in y ) {
+            var i = y[index]
+            i[key] = value
+            y[index] = i 
+        }
+        else {
+            var o = {}
+            o[key] = value
+            y[index] = o
+        }
+
+
         // y.push(d)
         setpayload(y)
         setdisable(false)
@@ -124,18 +130,34 @@ export function DataGrid({isfetched,data}) {
         key: 'category',
           render: (_, record) => (
             <Select defaultValue={record.category} style={{display: 'flex'}} onChange={(value) => onInputChange("category", record.msgId,value)}>
-                 <Select.Option value="Swiggy">Swiggy</Select.Option>
-                <Select.Option value="Instamart">Instamart</Select.Option>
-                <Select.Option value="Store">Store</Select.Option>
-                <Select.Option value="DineOut">DineOut</Select.Option>
-                <Select.Option value="Stuff">Stuff</Select.Option>
-                <Select.Option value="Subscription">Subscription</Select.Option>
-                <Select.Option value="Liqour">Liqour</Select.Option>
+                 <Select.Option value="SWIGGY">Swiggy</Select.Option>
+                <Select.Option value="INSTAMART">Instamart</Select.Option>
+                <Select.Option value="RENT">Rent</Select.Option>
+                <Select.Option value="DINEOUT">DineOut</Select.Option>
+                <Select.Option value="STUFF">Stuff</Select.Option>
+                <Select.Option value="TOBACCO">Tobacco</Select.Option>
+                <Select.Option value="LIQOUR">Liqour</Select.Option>
+                <Select.Option value="ELECTRICITY">Electricity</Select.Option>
+                <Select.Option value="COOK">Cook</Select.Option>
+                <Select.Option value="CAB">Cab</Select.Option>
+                <Select.Option value="TEA">Tea</Select.Option>
+                <Select.Option value="To ACC">To ACC</Select.Option>
+
+
+
 
                 </Select>
             // <Input value={text} onChange={onInputChange("goals", index)} />
           )
         },
+        {
+            title: 'Label',
+          dataIndex : 'label',
+          key: 'label',
+            render: (text, record) => (
+              <Input defaultValue={record.label} onChange={(e) => onInputChange("label", record.msgId,e.target.value)} />
+            )
+          },
       ];
 
       if (isfetched == false) {

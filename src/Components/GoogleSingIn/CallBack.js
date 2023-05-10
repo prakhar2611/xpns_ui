@@ -44,7 +44,7 @@ export function CallbackRoute() {
       })
       .catch(error => {
         console.error(error);
-        navigate('/Oops');
+        navigate('/OopsPage');
       });
 
       //setres(mydata);
