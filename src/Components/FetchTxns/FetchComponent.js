@@ -31,6 +31,7 @@ export function FetchRaw (){
     const [label,setlabel] = useState (null);
     const [fetched,setfetched] = useState(false);
     const [value4, setValue4] = useState('Fetch');
+    const [Hidden, setHidden] = useState(true);
 
 
     const [data,setdata] = useState([])
@@ -50,6 +51,11 @@ export function FetchRaw (){
     const onChange4 = ({ target: { value } }) => {
         console.log('radio4 checked', value);
         setValue4(value);
+        if(value == "Fetch") {
+          setHidden(false)
+        }else{
+          setHidden(true)
+        }
       };
 
     //fucntion on opening of date range
@@ -61,7 +67,7 @@ export function FetchRaw (){
       }
     };
 
-    //trying to set taody and week date on the range picker and then on fetch the data will be loaded but 
+    //trying to set today and week date on the range picker and then on fetch the data will be loaded but 
     //bypassing the date filling and going with today and week buttons and range for dynamic dates
     //was not able to complete the below as the limit for re rendering was happening - need to check 
     // function setD() {
@@ -99,6 +105,8 @@ export function FetchRaw (){
     }else if (event == "Week") {
         to = new Date(new Date().setDate(current.getDate())).toLocaleDateString('en-CA', options);
         from = new Date(new Date().setDate((current.getDate() - 7))).toLocaleDateString('en-CA', options);
+    }else if (event == "ByVPA") {
+      value4 = "ByVPA";
     }
   
     var token = sessionStorage.getItem('access_token');
@@ -123,8 +131,30 @@ export function FetchRaw (){
             .catch(error => console.error(error));
             setfetched(true)
         
+     }else if(value4 == "ByVPA") {
+
+console.log("Request payload for fetching the data : ", `http://localhost:9005/expense/api/v1/getXpnsByVpa` )
+
+            axios.get(`http://localhost:9005/expense/api/v1/getXpnsByVpa`,{
+            headers: {           
+                'Content-Type': 'application/json',
+                'token' :  token
+            },        
+        })
+        .then(response => {
+            console.log(response.data);
+            if (response.status == 200) {
+                setfetched(true)
+                setdata(response.data)
+
+            }
+        })
+            .catch(error => console.error(error));
+            setfetched(true)
      } else if (value4 == "Sync") 
     {
+      if (value4 != "ByVPA"){
+
         console.log("Request payload for fetching the data : ", `http://localhost:9005/SyncMail?label=${label}&to=${to}&from=${from}` )
 
         axios.get(`http://localhost:9005/SyncMail?label=${label}&to=${to}&from=${from}`,{
@@ -143,6 +173,7 @@ export function FetchRaw (){
             .catch(error => console.error(error));
    
         };
+      }
     }   
     
 
@@ -179,7 +210,9 @@ export function FetchRaw (){
             <Button onClick={() =>handleSubmit("ByDate")}>ByDate</Button>
             <Button onClick={()=>handleSubmit("Today")}>Today</Button>
             <Button onClick={()=>handleSubmit("Week")}>Week</Button>
-        </Space>
+            <Button type="primary" >
+        ByVPA
+      </Button>        </Space>
         </Form.Item>
 
     </Form>

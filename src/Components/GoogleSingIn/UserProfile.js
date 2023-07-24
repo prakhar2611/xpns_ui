@@ -35,14 +35,14 @@ function UserProfile() {
 
     return (
     <div className='center'>
-       <Space direction="vertical" size={'xs'}>
-    <Avatar size={80} src={picture} />
+    <Space direction="vertical" size={'xs'}>
     <div className='center'></div>
     <Card  title={name} bordered={false} >
     <p>{email}</p>
     <p>Welcome to dashboard. You can manage your expenses here. </p>
   </Card>
-  </Space></div>
+  </Space>
+  </div>
    
   
    

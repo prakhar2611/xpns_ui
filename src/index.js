@@ -8,13 +8,15 @@ import {
 } from "react-router-dom";
 import { Welcome } from './Components/Welcome';
 import { CallbackRoute } from './Components/GoogleSingIn/CallBack';
-import { SignIn } from './Components/GoogleSingIn/SignIn';
+import { SignInLanding } from './Components/Page/SignInLanding';
 import {OopsPage} from './Components/OopsPage'
+import { SignIn } from './Components/GoogleSingIn/SignIn';
+import { LayoutPage } from './Components/Page/WelcomePage/LayoutPage';
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <SignIn />,
+    element: <SignInLanding />,
   },
   {
     path : "/auth/callback",
@@ -33,10 +35,15 @@ const router = createBrowserRouter([
     path : "/OopsPage",
     element : <OopsPage />
   },
+  {
+    path : "/Layout",
+    element : <LayoutPage />
+  },
 ]);
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
+  
   <React.StrictMode>
     <RouterProvider router={router} />
   </React.StrictMode>

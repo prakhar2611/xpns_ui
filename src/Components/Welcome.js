@@ -1,6 +1,5 @@
 import { FetchRaw } from "./FetchTxns/FetchComponent";
-import UserProfile from "./WelcomePage/UserProfile";
-import {DataGrid} from './FetchTxns/DataGrid';
+import UserProfile from "./GoogleSingIn/UserProfile";
 import {Collapse,Space, Col, Row} from 'antd';
 
 const { Panel } = Collapse;
