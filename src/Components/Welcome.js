@@ -1,5 +1,5 @@
-import { FetchRaw } from "./FetchTxns/FetchComponent";
-import UserProfile from "./GoogleSingIn/UserProfile";
+import { FetchRaw } from "./Home/FetchComponent";
+import UserProfile from "./Home/UserProfile";
 import {Collapse,Space, Col, Row} from 'antd';
 
 const { Panel } = Collapse;

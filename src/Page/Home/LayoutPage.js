@@ -1,10 +1,12 @@
 import React ,{useState} from 'react';
-
+import "../SignInLanding.css"
 import { Layout, Menu, theme } from 'antd';
 import { Navigation } from './Navigation';
 import { AppstoreOutlined, MailOutlined, SettingOutlined } from '@ant-design/icons';
 
 const { Header, Content, Footer, Sider } = Layout;
+
+
 
 const items = [
   {
@@ -58,6 +60,13 @@ const items = [
   },
 ];
 
+const containerStyle = {
+  margin: "auto",
+  width: "60%",
+  height: "40%",
+  border: "50px ",
+  padding: "100px 20px 20px 20px",
+};
 
 
 export const LayoutPage = () => {
@@ -71,11 +80,13 @@ export const LayoutPage = () => {
         setcomponent(1)
     }else if(e.key == 'byVpa') {
       setcomponent(2)
-  }else if(e.key == 'amount') {
-    setcomponent(3)
-}else if(e.key == 'all') {
-  setcomponent(4)
-}
+    }else if(e.key == 'amount') {
+      setcomponent(3)
+    }else if(e.key == 'all') {
+      setcomponent(4)
+    }else if(e.key == 'sync') {
+      setcomponent(5)
+    }
     setCurrent(e.key);
   };
 
@@ -86,8 +97,9 @@ export const LayoutPage = () => {
     token: { colorBgContainer },
   } = theme.useToken();
   return (
+    
     <Layout>
-      <Layout>
+      <Layout style={{containerStyle}}>
         <Header style={{
             padding: 0,
             background: "#2B4B55",
@@ -121,3 +133,6 @@ export const LayoutPage = () => {
     </Layout>
   );
 };
+
+
+

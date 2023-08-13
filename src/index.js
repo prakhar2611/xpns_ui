@@ -8,10 +8,11 @@ import {
 } from "react-router-dom";
 import { Welcome } from './Components/Welcome';
 import { CallbackRoute } from './Components/GoogleSingIn/CallBack';
-import { SignInLanding } from './Components/Page/SignInLanding';
+import { SignInLanding } from './Page/SignInLanding';
 import {OopsPage} from './Components/OopsPage'
 import { SignIn } from './Components/GoogleSingIn/SignIn';
-import { LayoutPage } from './Components/Page/WelcomePage/LayoutPage';
+import { LayoutPage } from './Page/Home/LayoutPage';
+import {Y2s} from './Page/Home/Y2s'
 
 const router = createBrowserRouter([
   {
@@ -24,20 +25,16 @@ const router = createBrowserRouter([
 
   },
   {
-    path :"/SignIn",
-    element : <SignIn/>
-  },
-  {
-    path : "/Welcome",
-    element : <Welcome />
-  },
-  {
     path : "/OopsPage",
     element : <OopsPage />
   },
   {
     path : "/Layout",
     element : <LayoutPage />
+  },
+  {
+    path : "/Y2S",
+    element : <Y2s />
   },
 ]);
 

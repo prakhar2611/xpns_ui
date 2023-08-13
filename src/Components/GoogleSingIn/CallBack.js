@@ -39,7 +39,7 @@ export function CallbackRoute() {
       .then(response => {
         console.log(response.data);
         if (response.data.status == true) {
-            navigate('/Welcome');
+            navigate('/Layout');
         }
       })
       .catch(error => {

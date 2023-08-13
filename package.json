@@ -1,10 +1,11 @@
 {
   "name": "my-app",
   "version": "0.1.0",
-  "proxy": "http://localhost:9005/",
+  "proxy": "http://192.168.0.102:9005/",
   "private": true,
   "dependencies": {
     "@react-oauth/google": "^0.11.0",
+    "@reduxjs/toolkit": "^1.9.5",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
@@ -12,6 +13,8 @@
     "axios": "^1.4.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-infinite-scroll-component": "^6.1.0",
+    "react-redux": "^8.1.1",
     "react-router-dom": "^6.11.0",
     "react-scripts": "^5.0.1",
     "styled-components": "^5.3.10",
