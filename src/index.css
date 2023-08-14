@@ -1,5 +1,8 @@
+/* #ref  https://www.alexanderdarby.com/work*/
 body {
+  /* display: flex; */
   margin: 0;
+  overflow: hidden;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
@@ -21,3 +24,16 @@ code {
   background: '#0092ff';
   padding: '8px 0';
 }
+.animated-gradient {
+  background-image: -webkit-linear-gradient(125deg, #f2291b, #f7db25, #84f527);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  -webkit-animation: hue 15s infinite linear;
+  }@-webkit-keyframes hue {
+   from {
+     -webkit-filter: hue-rotate(0deg);
+   }
+   to {
+     -webkit-filter: hue-rotate(-360deg);
+   }
+  }
