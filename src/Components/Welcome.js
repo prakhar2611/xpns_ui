@@ -8,7 +8,7 @@ const { Panel } = Collapse;
 export function Welcome() {
     // Retrieve the query parameters from state or sessionStorage
     // ...
-    // axios.Get('http://localhost:9005/api/User/v1/GetUserProfile',{
+    // axios.Get('https://teencross.dev/api/User/v1/GetUserProfile',{
     //     headers: {
     //         'Content-Type': 'application/json',
             

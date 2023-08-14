@@ -60,7 +60,7 @@ export function ChangeDisableStop() {
 
 export function CallKillProcess() {
 
-    axios.get('http://192.168.0.102:8000/kill',{
+    axios.get('https://teencross.dev/ydl/api/v1/kill',{
         headers: {
             'Content-Type': 'application/json',
          },
@@ -96,7 +96,7 @@ export function UtilHandle(s) {
          }
     }
     console.log(payload)
-    axios.post('http://192.168.0.102:8000/mixer',JSON.stringify(payload),{
+    axios.post('https://teencross.dev/ydl/api/v1/mixer',JSON.stringify(payload),{
         headers: {
             'Content-Type': 'application/json',
          },
@@ -129,7 +129,7 @@ export function Y2s() {
             'play' : true
         }
             console.log("update payload :",p);
-            return axios.post('http://192.168.0.102:8000/download', JSON.stringify(p),{
+            return axios.post('https://teencross.dev/ydl/api/v1/download', JSON.stringify(p),{
                 headers: {
                     'Content-Type': 'application/json',
                  },
