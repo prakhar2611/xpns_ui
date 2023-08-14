@@ -13,7 +13,7 @@ export function PlaySong(song){
             'uri':String(song)
          }
          console.log("play object :",p )
-        axios.post('http://192.168.0.102:8000/play', JSON.stringify(p),{
+        axios.post('https://teencross.dev/ydl/api/v1/play', JSON.stringify(p),{
             headers: {
                 'Content-Type': 'application/json',
              },
@@ -42,7 +42,7 @@ export function Y2sList() {
       return;
     }
     setLoading(true);
-    axios.get('http://192.168.0.102:8000/list',{
+    axios.get('https://teencross.dev/ydl/api/v1/list',{
         headers: {
             'Content-Type': 'application/json',
          },
