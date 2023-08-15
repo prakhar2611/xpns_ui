@@ -289,12 +289,12 @@ export function Y2s() {
 
     const stl_list =  {
       color: "white",
-      display: "flex",
+      // display: "flex",
       height:'100vh  ',
       // flex:1,
 
       // flexDirection:'center',
-      justifyContent:'center',
+      // justifyContent:'center',
       backgroundColor: "grey",
   
     };

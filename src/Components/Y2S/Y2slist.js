@@ -83,23 +83,18 @@ export function Y2sList() {
         overflow: 'auto',
         padding: '0 16px',
         border: '1px solid rgba(140, 140, 140, 0.35)',
-      }}
-    >
-     {/* <List
-          dataSource={data}
-          
-        /> */}
-  <List
-          dataSource={data}
-          
+      }}>
+      {/* <List
+            dataSource={data}
+            
+          /> */}
+      <List style={{'backgroundColor':'black','display':'flex','justifyContent':'space-around'}}
+          dataSource={data}         
           renderItem={(item) => (
-            <List.Item onClick={()=>play(item)} key={item}>    
-                     {console.log(item)}
-
-              <List.Item.Meta
-                title={<a>{item}</a>}
-              />
-            </List.Item>
+          <List.Item onClick={()=>play(item)} key={item}>    
+          {console.log(item)}
+            <List.Item.Meta style={{'backgroundColor':'black'}} title={<a>{item}</a>}/>
+          </List.Item>
           )}
         />
     </div>
