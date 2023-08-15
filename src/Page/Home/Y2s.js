@@ -60,7 +60,7 @@ export function ChangeDisableStop() {
 
 export function CallKillProcess() {
 
-    axios.get('https://teencross.dev/ydl/api/v1/kill',{
+    axios.get('http://localhost:8000/ydl/api/v1/kill',{
         headers: {
             'Content-Type': 'application/json',
          },
@@ -96,7 +96,7 @@ export function UtilHandle(s) {
          }
     }
     console.log(payload)
-    axios.post('https://teencross.dev/ydl/api/v1/mixer',JSON.stringify(payload),{
+    axios.post('https://localhost:8000/ydl/api/v1/mixer',JSON.stringify(payload),{
         headers: {
             'Content-Type': 'application/json',
          },
@@ -120,6 +120,8 @@ export function Y2s() {
     const [payload,setpayload] = useState("") 
     const [disabled,setdisabled] = useState(false) 
     const [killvalue,setkillvaue] = useState( "" ) 
+    const base_url = 'http://localhost:8000/ydl/api/v1/download'
+    // const url = 'https://teencross.dev/ydl/api/v1/download'
    // const [disbaleStop,setdisablestop] = useState(true)
 
 
@@ -127,9 +129,34 @@ export function Y2s() {
         const p = {
             'url' : payload,
             'play' : true
+        } 
+            console.log("update payload :",p);
+            return axios.post('https://localhost:8000/ydl/api/v1/download', JSON.stringify(p),{
+                headers: {
+                    'Content-Type': 'application/json',
+                 },
+            }).then((response) => { if(response.status == 200) {
+                setdisabled(true)
+                setkillvaue(response.data.pid)
+                console.log(response.data.pid)
+                //setdisablestop(false)
+             }
+            }
+            )
+              .catch(error => {
+                console.error(error);
+                throw error;
+              }); 
+         
+
+    }
+    function get_meta () {
+        const p = {
+            'url' : payload,
+            'play' : true
         }
             console.log("update payload :",p);
-            return axios.post('https://teencross.dev/ydl/api/v1/download', JSON.stringify(p),{
+            return axios.post('https://localhost:8000/ydl/api/v1/download', JSON.stringify(p),{
                 headers: {
                     'Content-Type': 'application/json',
                  },
@@ -195,7 +222,7 @@ export function Y2s() {
       alignItems:'center',
       flexDirection : 'column',
       justifyContent :'flex-start',
-      // backgroundColor: "white",
+      backgroundColor: "white",
       // alignItems: 'stretch'
       
     };
@@ -218,7 +245,7 @@ export function Y2s() {
       padding: '2rem',
       // width: '80vw',
       // flexWrap: 'wrap',
-      border :'2px dotted #bbb',
+      // border :'2px dotted #bbb',
       borderRadius:'2.5rem',
       textAlign: 'center',
       // justifyContent: 'center',
@@ -227,8 +254,8 @@ export function Y2s() {
       // flexDirection : 'column',
       // flexDirection:'center',
       // justifyContent:'center',
-      // backgroundColor: "#7490AB",
-      background: 'linear-gradient(to bottom, #eee 0%, #77ab9f 100%)'
+      backgroundColor: "#7490AB",
+      // background: 'linear-gradient(to bottom, #eee 0%, #77ab9f 100%)'
       // background: 'linear-gradient(to bottom, #ffffff 0%, #BBB 100%)'
   
     };
@@ -237,13 +264,13 @@ export function Y2s() {
       // margin: '2rem 0rem',
       padding:'.2rem .5rem',
       margin:'1rem 0rem',
-      display: "flex",
+      // display: "flex",
       // backgroundColor: 'grey',
       
 
       flexDirection : 'row',
       // flexDirection:'center',
-      justifyContent:'',
+      // justifyContent:'space-around',
       // backgroundColor: "black",
   
     };
@@ -268,7 +295,7 @@ export function Y2s() {
 
       // flexDirection:'center',
       justifyContent:'center',
-      backgroundColor: "black",
+      backgroundColor: "grey",
   
     };
 
@@ -279,12 +306,13 @@ export function Y2s() {
         //  <AnimatedGradientBg style={{"display":"block","overflow":'hidden',"margin":'0 0',"width":'100%'}}>BG</AnimatedGradientBg>
         <Layout style={{background : "#acaa99" , display:'flex',flexWrap: 'wrap',flexDirection:'column'}}>
            <Content>
-            <AnimatedGradientBg style={{"display":"block","overflow":'hidden',"margin":'0 0',"width":'100%',"height":'20vh'}}>  <>
-              <AnimatedGradientText style={{"position":"absolute", "fontSize":'5.5rem',
+            <AnimatedGradientBg style={{"display":"block","overflow":'hidden','position':'absolute',"margin":'0 0',"width":'100%',"height":'100vh','opacity':'.4'}}>  <>
+              <AnimatedGradientText style={{"position":"relative", "fontSize":'5.5rem','opacity':'1',
       "fontFamily": "Helvetica",
       "overflow":"hidden",
       "textAlign":'center',}}>CURRENTLY PLAYING THIS REALLY NICE SONG</AnimatedGradientText>
               </></AnimatedGradientBg>
+          {/* <div style={{'backgroundColor':'red','position':'abosolute','height':'100vh','z-index':'-1','opacity':'.4'}}></div> */}
           {/* <Layout style={{background : "#7490AB" ,padding : "100px",width: "100vw",height:"100vw"}}> */}
             {/* <Content style={{backgroundColor:'salmon'}}> */}
               {/* <Header className="header" style={stl_header}> */}
@@ -299,6 +327,8 @@ export function Y2s() {
               {/* </Header> */}
               <Content className="toolbar" style={stl_toolbar}>
                 
+              
+               
               
                 <Form.Item  >
                 <Input disabled={disabled}  style={stl_urlbar} onChange={(e)=>captureUrl(e.target.value)} placeholder="Please Enter Youtube Link" />

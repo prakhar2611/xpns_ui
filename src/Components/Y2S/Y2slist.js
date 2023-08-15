@@ -12,8 +12,9 @@ export function PlaySong(song){
         const p = {
             'uri':String(song)
          }
+         
          console.log("play object :",p )
-        axios.post('https://teencross.dev/ydl/api/v1/play', JSON.stringify(p),{
+        axios.post('http://localhost:8000/ydl/api/v1/play', JSON.stringify(p),{
             headers: {
                 'Content-Type': 'application/json',
              },
@@ -42,7 +43,7 @@ export function Y2sList() {
       return;
     }
     setLoading(true);
-    axios.get('https://teencross.dev/ydl/api/v1/list',{
+    axios.get('http://localhost:8000/ydl/api/v1/list',{
         headers: {
             'Content-Type': 'application/json',
          },
