@@ -60,11 +60,11 @@ background-clip: text;
 `;
 const AnimatedGradientBg = styled.h1`
   animation: ${gradient} 5s ease-in-out infinite;
-  background: linear-gradient(to right, #aea, #fe6, #784da9, #1bf893);
+  background: linear-gradient(to right, #fe6, #784da9, #red, #green);
   
-  background-size: 500%;
+  background-size: 1000%;
   background-clip: text;
-  // -webkit-background-clip: text;
+  -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 `;
 
@@ -122,18 +122,24 @@ export function Y2sList() {
             dataSource={data}
             
           /> */}
-          <AnimatedGradientBg style={{"display":"block","overflow":'hidden','width':'100%','position':'absolute',"margin":'0 0',"width":'100%',"height":'10vh','opacity':'1'}}>  <>
+          {/* <AnimatedGradientBg style={{"display":"flex","overflow":'hidden','width':'100vh','position':'absolute',"margin":'0',"width":'100%',"height":'100vh','opacity':'.8'}}>  <>
               <AnimatedGradientText style={{"fontSize":'5.5rem','opacity':'1',
       "fontFamily": "Helvetica",
-      "overflow":"hidden",
-      "textAlign":'center',}}>CURRENTLY PLAYING THIS REALLY NICE SONG</AnimatedGradientText>
-              </></AnimatedGradientBg>
+      "overflow":"auto",
+      "textAlign":'center',}}>SICKO MODE.mp4</AnimatedGradientText>
+              </></AnimatedGradientBg> */}
       <List 
           dataSource={data}         
           renderItem={(item) => (
           <List.Item style={{'backgroundColor':'none','display':'flex','justifyContent':'center','flexDirection':'row'}} onClick={()=>play(item)} key={item}>    
           {console.log(item)}
-            <List.Item.Meta style={{'background':'none','padding':'.5rem',}} title={<a>{item}</a>}/>
+            <List.Item.Meta style={{'background':'none','display':'flex','justifyContent':'space-around'}} title=
+            { <AnimatedGradientBg style={{"display":"flex",'justifyContent':'space-around',"overflow":'hidden','width':'100vh','position':'absolute',"margin":'0',"height":'100vh','opacity':'.5'}}>  <>
+            <AnimatedGradientText style={{"fontSize":'3rem','opacity':'1','margin':'.2rem 0 .2rem 0',
+    "fontFamily": "Helvetica",
+    "overflow":"auto",
+    "textAlign":'center',}}>{item}</AnimatedGradientText>
+            </></AnimatedGradientBg>}/>
           </List.Item>
           )}
         />
