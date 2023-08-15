@@ -59,8 +59,9 @@ export function ChangeDisableStop() {
 }
 
 export function CallKillProcess() {
-
-    axios.get('http://localhost:8000/ydl/api/v1/kill',{
+    const k_url = 'http://192.168.1.5:8000/ydl/api/v1/kill'
+    // const k_url = 'http://localhost:8000/ydl/api/v1/kill'
+    axios.get(k_url,{
         headers: {
             'Content-Type': 'application/json',
          },
@@ -96,7 +97,9 @@ export function UtilHandle(s) {
          }
     }
     console.log(payload)
-    axios.post('https://localhost:8000/ydl/api/v1/mixer',JSON.stringify(payload),{
+    const mx_url = 'http://192.168.1.5:8000/ydl/api/v1/mixer'
+    // const mx_url = 'localhost:8000/ydl/api/v1/mixer'
+    axios.post(mx_url,JSON.stringify(payload),{
         headers: {
             'Content-Type': 'application/json',
          },
@@ -120,18 +123,20 @@ export function Y2s() {
     const [payload,setpayload] = useState("") 
     const [disabled,setdisabled] = useState(false) 
     const [killvalue,setkillvaue] = useState( "" ) 
-    const base_url = 'http://localhost:8000/ydl/api/v1/download'
+    // const base_url = 'http://localhost:8000/ydl/api/v1/download'
     // const url = 'https://teencross.dev/ydl/api/v1/download'
-   // const [disbaleStop,setdisablestop] = useState(true)
-
-
+    // const [disbaleStop,setdisablestop] = useState(true)
+    
     function callDownloadAndPlay () {
-        const p = {
-            'url' : payload,
-            'play' : true
-        } 
-            console.log("update payload :",p);
-            return axios.post('https://localhost:8000/ydl/api/v1/download', JSON.stringify(p),{
+      const p = {
+        'url' : payload,
+        'play' : true
+      } 
+      console.log("update payload :",p);
+      
+      const d_url = 'http://192.168.1.5:8000/ydl/api/v1/download'
+      // const d_url = 'localhost:8000/ydl/api/v1/download'
+            return axios.post(d_url, JSON.stringify(p),{
                 headers: {
                     'Content-Type': 'application/json',
                  },
@@ -156,7 +161,9 @@ export function Y2s() {
             'play' : true
         }
             console.log("update payload :",p);
-            return axios.post('https://localhost:8000/ydl/api/v1/download', JSON.stringify(p),{
+        const d_url = 'http://192.168.1.5:8000/ydl/api/v1/download'
+      // const d_url = 'localhost:8000/ydl/api/v1/download'
+            return axios.post(d_url, JSON.stringify(p),{
                 headers: {
                     'Content-Type': 'application/json',
                  },
