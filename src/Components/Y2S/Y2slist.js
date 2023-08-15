@@ -3,7 +3,10 @@ import InfiniteScroll from 'react-infinite-scroll-component';
 import { Avatar, Divider, List, Skeleton } from 'antd';
 import axios from 'axios'
 import { CallKillProcess } from '../../Page/Home/Y2s'; 
+import styled from "styled-components";
+import { keyframes } from "styled-components";
 
+// import AnimatedGradientBg,AnimatedGradientText from ''
 var   nextId =0 
 
 export function PlaySong(song){
@@ -32,6 +35,38 @@ export function PlaySong(song){
     
     
   };
+
+const gradient = keyframes`
+{
+0% {
+  background-position: 0 50%;
+}
+50% {
+  background-position: 100% 50%;
+}
+
+100% {
+  background-position: 0 50%;
+}}
+`;
+const AnimatedGradientText = styled.h1`
+animation: ${gradient} 5s ease-in-out infinite;
+background: linear-gradient(to right, #ee9ca7, #ffdde1, #2193b0, #6dd5ed);
+background-size: 300%;
+background-clip: text;
+
+-webkit-background-clip: text;
+-webkit-text-fill-color: transparent;
+`;
+const AnimatedGradientBg = styled.h1`
+  animation: ${gradient} 5s ease-in-out infinite;
+  background: linear-gradient(to right, #aea, #fe6, #784da9, #1bf893);
+  
+  background-size: 500%;
+  background-clip: text;
+  // -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+`;
 
 
 export function Y2sList() {
@@ -79,7 +114,6 @@ export function Y2sList() {
     <div
       id="scrollableDiv"
       style={{
-        height: 400,
         overflow: 'auto',
         padding: '0 16px',
         border: '1px solid rgba(140, 140, 140, 0.35)',
@@ -88,12 +122,18 @@ export function Y2sList() {
             dataSource={data}
             
           /> */}
-      <List style={{'backgroundColor':'black','display':'flex','justifyContent':'space-around'}}
+          <AnimatedGradientBg style={{"display":"block","overflow":'hidden','width':'100%','position':'absolute',"margin":'0 0',"width":'100%',"height":'10vh','opacity':'1'}}>  <>
+              <AnimatedGradientText style={{"fontSize":'5.5rem','opacity':'1',
+      "fontFamily": "Helvetica",
+      "overflow":"hidden",
+      "textAlign":'center',}}>CURRENTLY PLAYING THIS REALLY NICE SONG</AnimatedGradientText>
+              </></AnimatedGradientBg>
+      <List 
           dataSource={data}         
           renderItem={(item) => (
-          <List.Item onClick={()=>play(item)} key={item}>    
+          <List.Item style={{'backgroundColor':'none','display':'flex','justifyContent':'center','flexDirection':'row'}} onClick={()=>play(item)} key={item}>    
           {console.log(item)}
-            <List.Item.Meta style={{'backgroundColor':'black'}} title={<a>{item}</a>}/>
+            <List.Item.Meta style={{'background':'none','padding':'.5rem',}} title={<a>{item}</a>}/>
           </List.Item>
           )}
         />
