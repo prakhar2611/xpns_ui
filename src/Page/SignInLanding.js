@@ -12,28 +12,24 @@ export const SignInLanding = () => {
   } = theme.useToken();
 
   return (
-    <Layout style={{background : "#7490AB" ,padding : "100px"}}>
+    
       <Layout className="layout">
-        <Content style={{padding : 30}}>
+        
             <Card className="centerCard"
                   hoverable
                   cover={
                     <SignInCard />
                   }
                 >
-                  <Meta style={{}}
+                  <Meta style={{'backgroundColor':'blue'}}
                     title="Manage Your Expense"
                     description="Get your expense insights and manage your saving !"
                   />
                 </Card>
-        </Content>
+       
+          
       </Layout>
-      <Footer
-          className="layout" 
-        >
-          @XPNS
-        </Footer>
-    </Layout>
+
     
   );
 };

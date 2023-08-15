@@ -1,7 +1,7 @@
 {
   "name": "my-app",
   "version": "0.1.0",
-  "proxy": "http://192.168.0.102:9005/",
+  "proxy": "http://localhost/",
   "private": true,
   "dependencies": {
     "@react-oauth/google": "^0.11.0",
@@ -21,7 +21,7 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "set HTTPS=true set SSL_CRT_FILE=.certificates/localhost.crt set SSL_KEY_FILE=.certificates/localhost.key && react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"

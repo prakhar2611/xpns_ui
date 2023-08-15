@@ -35,8 +35,8 @@ const gradient = keyframes`
 }}
 `;
 const AnimatedGradientText = styled.h1`
-  animation: ${gradient} 5s ease-in-out infinite;
-  background: linear-gradient(to right, #ee9ca7, #ffdde1, #2193b0, #6dd5ed);
+  animation: ${gradient} 2s ease-in-out infinite;
+  background: linear-gradient(to left, #ee9ca7, #ffdde1, #2193b0, #6dd5ed);
   background-size: 300%;
   background-clip: text;
 
@@ -44,10 +44,10 @@ const AnimatedGradientText = styled.h1`
   -webkit-text-fill-color: transparent;
 `;
 const AnimatedGradientBg = styled.h1`
-  animation: ${gradient} 5s ease-in-out infinite;
-  background: linear-gradient(to right, #aea, #fe6, #784da9, #1bf893);
-  
-  background-size: 500%;
+  animation: ${gradient} 10s ease-in-out infinite;
+  // background: linear-gradient(to right, #aea, #fe6, #784da9, #1bf893);
+  background: radial-gradient(#ffdde1, #ee9ca7, blue);
+  background-size: 1000%;
   background-clip: text;
   // -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
