@@ -8,14 +8,14 @@ import axios from 'axios'
 import { CallKillProcess } from '../../Page/Home/Y2s'; 
 import styled from "styled-components";
 import { keyframes } from "styled-components";
+import { Counter } from '../../Page/Home/Counter';
 // import {Rack } from './Y2sList_'
-
+import { useSelector, useDispatch } from 'react-redux'
+import { incrementByvalue } from '../../Utils/Reducer/metaSlice';
 // import AnimatedGradientBg,AnimatedGradientText from ''
 var   nextId =0 
 
-export function PlaySong(song){
-
-    
+export function PlaySong(dispatch,song){
         const p = {
             'uri':String(song)
          }
@@ -29,7 +29,13 @@ export function PlaySong(song){
              },
         }).then((response) => { if(response.status == 200) {
             console.log("response of play ",response) 
-
+            const meta = {
+              'title' : response.data.meta.title,
+              'thumbnail' : response.data.meta.yt_thmb,
+              'views': response.data.meta.views,
+              'duration':response.data.meta.length
+            } 
+            dispatch(incrementByvalue(meta))
             
          }
         }
@@ -84,6 +90,9 @@ const AnimatedGradientBg = styled.h1`
 
 
 export function Y2sList() {
+  
+  const dispatch = useDispatch()
+
   const [loading, setLoading] = useState(false);
   const [data, setData] = useState([]);
   const b_url = 'http://192.168.1.5:8000/ydl/api/v1/list'
@@ -113,9 +122,9 @@ export function Y2sList() {
       // console.log(data)
   };
 
-  const play = (song) => {
+  const play = (dispatch,song) => {
     console.log("Song to play -",song)
-    if (PlaySong(song)) {
+    if (PlaySong(dispatch,song)) {
         console.log("Song played-",song)
     }
   }
@@ -197,13 +206,13 @@ export function Y2sList() {
           </></AnimatedGradientBg>}
         </div>
         </div> */}
+                  <Counter/>
 
       {/* upgraded from aug 15 */}
-
       <List 
           dataSource={data}         
           renderItem={(item) => (
-          <List.Item style={{'background': 'linear-gradient(to right, #fe6, #784da9, #red, #green)'}} onClick={()=>play(item)} key={item}>    
+          <List.Item style={{'background': 'linear-gradient(to right, #fe6, #784da9, #red, #green)'}} onClick={()=>play(dispatch,item)} key={item}>    
           {console.log(item)}
             <List.Item.Meta style={{'backgroundColor':'rgba(0,0,0,.1)','padding':'1rem'}} title=
             {  <a>{item}</a>}/>

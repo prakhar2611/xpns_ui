@@ -2,14 +2,18 @@
 import React, { useState } from 'react';
 import { Button, Form, Input, Radio,Layout,message,Switch,Progress,Badge,Avatar,Statistic} from 'antd';
 import {EyeOutlined,FieldTimeOutlined } from '@ant-design/icons';
-// import './test.css';
+//import './test.css';
 import { DownloadAndPlay } from '../../Utils/Player';
 import axios from 'axios'
 import { Y2sList } from '../../Components/Y2S/Y2slist';
-
+import { useSelector, useDispatch } from 'react-redux'
+import {  incrementByvalue } from '../../Utils/Reducer/metaSlice';
+import { Counter } from './Counter';
 // import React from "react";
 import styled from "styled-components";
 import { keyframes } from "styled-components";
+import { ProgressBarComponent }  from '@syncfusion/ej2-react-progressbar';
+
 
 /**
  * Example Text Gradient Animation
@@ -22,10 +26,31 @@ import { keyframes } from "styled-components";
 //   );
 // }
 
+
+export function move(duration) {
+  var i = 0;
+  if (i == 0) {
+    i = 1;
+    var elem = document.getElementById("myBar");
+    var width = 10;
+    var id = setInterval(frame, duration);
+    function frame() {
+      if (width >= 100) {
+        clearInterval(id);
+        i = 0;
+      } else {
+        width++;
+        elem.style.width = width + "%";
+        elem.innerHTML = width  + "%";
+      }
+    }
+  }
+}
+
 export function SetThumnail({thumbnail,length,views}){
   if(thumbnail!="") {
     return(<div tyle={{'display' : 'flex','flexDirection' : "row"}}>
-      <div style={{'display' : 'flex','flexDirection' : "row",'justifyContent' : 'center'} }>
+      <div style={{'display' : 'flex','flexDirection' : "row",'justifyContent' : 'center','overflow':'hidden'} }>
       
       <img sizes='xs' style={{'height' : '50vh'}} src={thumbnail}></img>
       
@@ -41,12 +66,18 @@ export function SetThumnail({thumbnail,length,views}){
         <div style={{'display' : 'flex','flexDirection' : "row",'justifyContent' : 'center'} }>
       
       <Progress strokeLinecap="butt" percent={75} />
-      
+      {/* <ProgressBarComponent id="linear" type='Linear' trackThickness={24} progressThickness={24} value={60} animation={{
+            enable: true,
+            duration: {length},
+            delay: 0
+        }}>
+    </ProgressBarComponent> */}
           </div>
       </div>
     );
   }
 }
+
 
 const gradient = keyframes`
 {
@@ -143,8 +174,17 @@ export function UtilHandle(s) {
     
 
 }
+
+export function savemeta ()
+
+ {
+
+}
    
 export function Y2s() {
+
+  const meta_info = useSelector((state) => state.meta.value)
+  const dispatch = useDispatch()
 
     const [messageApi, contextHolder] = message.useMessage();
     const [payload,setpayload] = useState("") 
@@ -185,7 +225,9 @@ export function Y2s() {
                   'duration':response.data.meta.length
                 } 
                 setkillvaue(response.data.pid)
-                setcurrmetavalue(meta)
+                dispatch(incrementByvalue(meta))
+                //setcurrmetavalue(meta)
+               
                 //setdisablestop(false)
              }
             }
@@ -369,7 +411,7 @@ export function Y2s() {
               <AnimatedGradientText style={{"position":"relative", "fontSize":'5.5rem','opacity':'1',
       "fontFamily": "Helvetica",
       "overflow":"hidden",
-      "textAlign":'center',}}>CURRENTLY PLAYING {currmetavalue.title}</AnimatedGradientText>
+      "textAlign":'center',}}>CURRENTLY PLAYING {meta_info.title}</AnimatedGradientText>
 
               </></AnimatedGradientBg>
 
@@ -379,7 +421,8 @@ export function Y2s() {
               {/* <Header className="header" style={stl_header}> */}
                 
                </Content>
-               <SetThumnail thumbnail={currmetavalue.thumbnail} length={currmetavalue.duration} views={currmetavalue.views}/>
+               <SetThumnail thumbnail={meta_info.thumbnail} length={meta_info.duration} views={meta_info.views}/>
+               
               {/* <span style={aspan}> */}
               {/* </span> */}
               {/* <p className='animated-gradient'> CURRENTLY PLAYING THIS </p> */}
@@ -400,7 +443,8 @@ export function Y2s() {
                   <Switch onClick={kill} style={{}}/>
                   <Button   className='btn' style={stl_btn} type="primary" onClick={()=>UtilHandle("UP")}>Vol Up</Button> 
                   <Button   className='btn' style={stl_btn} type="primary" onClick={()=>UtilHandle("DOWN")}>Vol Down</Button> 
-                  <Button  className='btn' style={stl_btn} type="primary" onClick={()=>UtilHandle("MUTE")}>Mute</Button> 
+                  <Button  className='btn' style={stl_btn} type="primary" onClick={()=>UtilHandle("MUTE")}>Mute</Button>
+                  <Counter/>
                 </div>
 
                 </Form.Item>

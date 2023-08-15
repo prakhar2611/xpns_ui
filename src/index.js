@@ -1,7 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
-
+import store from './Utils/store';
+import { Provider } from 'react-redux'
 import reportWebVitals from './reportWebVitals';
 import {
   createBrowserRouter,
@@ -14,6 +15,7 @@ import {OopsPage} from './Components/OopsPage'
 import { SignIn } from './Components/GoogleSingIn/SignIn';
 import { LayoutPage } from './Page/Home/LayoutPage';
 import {Y2s} from './Page/Home/Y2s'
+import { Counter } from './Page/Home/Counter.js';
 
 const router = createBrowserRouter([
   {
@@ -37,14 +39,21 @@ const router = createBrowserRouter([
     path : "/Y2S",
     element : <Y2s />
   },
+  {
+    path : "/counter",
+    element : <Counter />
+  }
 ]);
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   
   <React.StrictMode>
+  <Provider store={store}>
     <RouterProvider router={router} />
+    </Provider>
   </React.StrictMode>
+  
 );
 
 // If you want to start measuring performance in your app, pass a function
