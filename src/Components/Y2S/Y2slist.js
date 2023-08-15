@@ -110,7 +110,7 @@ export function Y2sList() {
         throw error;
       }); 
 
-      console.log(data)
+      // console.log(data)
   };
 
   const play = (song) => {

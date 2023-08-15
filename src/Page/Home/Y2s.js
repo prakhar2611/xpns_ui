@@ -1,6 +1,7 @@
 
 import React, { useState } from 'react';
-import { Button, Form, Input, Radio,Layout,message} from 'antd';
+import { Button, Form, Input, Radio,Layout,message,Switch,Progress,Badge,Avatar,Statistic} from 'antd';
+import {EyeOutlined,FieldTimeOutlined } from '@ant-design/icons';
 // import './test.css';
 import { DownloadAndPlay } from '../../Utils/Player';
 import axios from 'axios'
@@ -20,6 +21,32 @@ import { keyframes } from "styled-components";
 //     </>
 //   );
 // }
+
+export function SetThumnail({thumbnail,length,views}){
+  if(thumbnail!="") {
+    return(<div tyle={{'display' : 'flex','flexDirection' : "row"}}>
+      <div style={{'display' : 'flex','flexDirection' : "row",'justifyContent' : 'center'} }>
+      
+      <img sizes='xs' style={{'height' : '50vh'}} src={thumbnail}></img>
+      
+          </div>
+      
+   
+    <div style={{'display' : 'flex','flexDirection' : "row",'justifyContent' : 'space-between'} }>
+      
+    <Statistic title="Views" value={views} prefix={<EyeOutlined />} />
+    <Statistic title="Duration" value={length} prefix={<FieldTimeOutlined />} />
+    
+        </div>
+        <div style={{'display' : 'flex','flexDirection' : "row",'justifyContent' : 'center'} }>
+      
+      <Progress strokeLinecap="butt" percent={75} />
+      
+          </div>
+      </div>
+    );
+  }
+}
 
 const gradient = keyframes`
 {
@@ -123,6 +150,15 @@ export function Y2s() {
     const [payload,setpayload] = useState("") 
     const [disabled,setdisabled] = useState(false) 
     const [killvalue,setkillvaue] = useState( "" ) 
+
+    const [currmetavalue,setcurrmetavalue] = useState({
+      'title' : 'This Nice Song !',
+      'thumbnail' : '',
+      'views': 0,
+      'duration':0
+    })
+
+    
     // const base_url = 'http://localhost:8000/ydl/api/v1/download'
     // const url = 'https://teencross.dev/ydl/api/v1/download'
     // const [disbaleStop,setdisablestop] = useState(true)
@@ -142,8 +178,14 @@ export function Y2s() {
                  },
             }).then((response) => { if(response.status == 200) {
                 setdisabled(true)
+                const meta = {
+                  'title' : response.data.meta.title,
+                  'thumbnail' : response.data.meta.yt_thmb,
+                  'views': response.data.meta.views,
+                  'duration':response.data.meta.length
+                } 
                 setkillvaue(response.data.pid)
-                console.log(response.data.pid)
+                setcurrmetavalue(meta)
                 //setdisablestop(false)
              }
             }
@@ -155,36 +197,44 @@ export function Y2s() {
          
 
     }
-    function get_meta () {
-        const p = {
-            'url' : payload,
-            'play' : true
-        }
-            console.log("update payload :",p);
-        const d_url = 'http://192.168.1.5:8000/ydl/api/v1/download'
-      // const d_url = 'localhost:8000/ydl/api/v1/download'
-            return axios.post(d_url, JSON.stringify(p),{
-                headers: {
-                    'Content-Type': 'application/json',
-                 },
-            }).then((response) => { if(response.status == 200) {
-                setdisabled(true)
-                setkillvaue(response.data.pid)
-                console.log(response.data.pid)
-                //setdisablestop(false)
-             }
-            }
-            )
-              .catch(error => {
-                console.error(error);
-                throw error;
-              }); 
+    // function get_meta () {
+    //     const p = {
+    //         'url' : payload,
+    //         'play' : true
+    //     }
+    //         console.log("update payload :",p);
+    //     const d_url = 'http://192.168.1.5:8000/ydl/api/v1/download'
+    //   // const d_url = 'localhost:8000/ydl/api/v1/download'
+    //         return axios.post(d_url, JSON.stringify(p),{
+    //             headers: {
+    //                 'Content-Type': 'application/json',
+    //              },
+    //         }).then((response) => { if(response.status == 200) {
+    //             setdisabled(true)
+    //             const meta ={
+    //               'title' : response.data.meta.title,
+    //               'thumbnail' : response.data.meta.yt_thmb,
+    //               'views': response.data.meta.views,
+    //               'duration':response.data.meta.length
+    //             }
+    //             setkillvaue(response.data.pid)
+    //             setcurrmetavalue(meta)
+    //             console.log(response)
+    //             //setdisablestop(false)
+    //          }
+    //         }
+    //         )
+    //           .catch(error => {
+    //             console.error(error);
+    //             throw error;
+    //           }); 
          
 
-    }
+    // }
 
     const kill = () => {
              if(CallKillProcess()){
+              
                 //setdisablestop(true)
              }
         
@@ -312,20 +362,24 @@ export function Y2s() {
         // <div className='some_css'>
         //  <AnimatedGradientBg style={{"display":"block","overflow":'hidden',"margin":'0 0',"width":'100%'}}>BG</AnimatedGradientBg>
         <Layout style={{background : "#acaa99" , display:'flex',flexWrap: 'wrap',flexDirection:'column'}}>
+          
            <Content>
+           
             <AnimatedGradientBg style={{"display":"block","overflow":'hidden','position':'absolute',"margin":'0 0',"width":'100%',"height":'100vh','opacity':'.4'}}>  <>
               <AnimatedGradientText style={{"position":"relative", "fontSize":'5.5rem','opacity':'1',
       "fontFamily": "Helvetica",
       "overflow":"hidden",
-      "textAlign":'center',}}>CURRENTLY PLAYING THIS REALLY NICE SONG</AnimatedGradientText>
+      "textAlign":'center',}}>CURRENTLY PLAYING {currmetavalue.title}</AnimatedGradientText>
+
               </></AnimatedGradientBg>
+
           {/* <div style={{'backgroundColor':'red','position':'abosolute','height':'100vh','z-index':'-1','opacity':'.4'}}></div> */}
           {/* <Layout style={{background : "#7490AB" ,padding : "100px",width: "100vw",height:"100vw"}}> */}
             {/* <Content style={{backgroundColor:'salmon'}}> */}
               {/* <Header className="header" style={stl_header}> */}
                 
                </Content>
-            
+               <SetThumnail thumbnail={currmetavalue.thumbnail} length={currmetavalue.duration} views={currmetavalue.views}/>
               {/* <span style={aspan}> */}
               {/* </span> */}
               {/* <p className='animated-gradient'> CURRENTLY PLAYING THIS </p> */}
@@ -343,7 +397,7 @@ export function Y2s() {
                 <div className="btns" style={stl_btns} >
                   <Button className='btn' style={stl_btn} type="primary" onClick={callDownloadAndPlay}>Play-save</Button>
                   {/* <Button disabled={disbaleStop} type="primary" onClick={kill}>Stop</Button> */}
-                  <Button   className='btn' style={stl_btn} type="primary" onClick={kill}>Stop</Button> 
+                  <Switch onClick={kill} style={{}}/>
                   <Button   className='btn' style={stl_btn} type="primary" onClick={()=>UtilHandle("UP")}>Vol Up</Button> 
                   <Button   className='btn' style={stl_btn} type="primary" onClick={()=>UtilHandle("DOWN")}>Vol Down</Button> 
                   <Button  className='btn' style={stl_btn} type="primary" onClick={()=>UtilHandle("MUTE")}>Mute</Button> 
