@@ -133,7 +133,7 @@ export function Y2s() {
         'play' : true
       } 
       console.log("update payload :",p);
-      
+                    
       const d_url = 'http://192.168.1.5:8000/ydl/api/v1/download'
       // const d_url = 'localhost:8000/ydl/api/v1/download'
             return axios.post(d_url, JSON.stringify(p),{
