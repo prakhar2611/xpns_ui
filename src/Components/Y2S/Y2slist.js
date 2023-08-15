@@ -72,13 +72,15 @@ const AnimatedGradientBg = styled.h1`
 export function Y2sList() {
   const [loading, setLoading] = useState(false);
   const [data, setData] = useState([]);
-
+  const b_url = 'http://192.168.1.5:8000/ydl/api/v1'
+  // const b_url = 'http://localhost:8000/ydl/api/v1'
   const loadMoreData = () => {
     if (loading) {
       return;
     }
     setLoading(true);
-    axios.get('http://localhost:8000/ydl/api/v1/list',{
+    
+    axios.get(b_url+'/list',{
         headers: {
             'Content-Type': 'application/json',
          },
