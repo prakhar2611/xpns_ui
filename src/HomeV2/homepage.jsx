@@ -1,9 +1,9 @@
 import React ,{useState} from 'react';
-import "../SignInLanding.css"
-import { Layout, Menu, theme } from 'antd';
-import { Navigation } from './Navigation';
+// import "../SignInLanding.css"
+import { Layout, Menu, theme, Box } from 'antd';
+// import { Navigation } from './Navigation';
 import { AppstoreOutlined, MailOutlined, SettingOutlined } from '@ant-design/icons';
-
+import {'App' as App} from './Infiniter.jsx';
 const { Header, Content, Footer, Sider } = Layout;
 
 
@@ -69,7 +69,7 @@ const containerStyle = {
 };
 
 
-export const LayoutPage = () => {
+export const HomePage = () => {
   const [component,setcomponent] = useState(1)
   const [current, setCurrent] = useState('mail');
 
@@ -90,48 +90,27 @@ export const LayoutPage = () => {
     setCurrent(e.key);
   };
 
-  function renderComponent() {
-    console.log("component rerender")
-  }
+
   const {
     token: { colorBgContainer },
   } = theme.useToken();
+  
   return (
     
     <Layout>
-      <Layout style={{containerStyle}}>
-        <Header style={{
+     <Header style={{
             padding: 0,
-            background: "#2B4B55",
-            color : "#2B4B55"
+            // background: "#2B4B55",
+            // color : "#2B4B55"
           }}
         >
 <Menu onClick={onClick} selectedKeys={[current]} mode="horizontal" items={items} />        
 </Header>
-        <Content
-          style={{
-            margin: '24px 16px 0',
-          }}
-        >
-          <div
-            style={{
-              padding: 24,
-              minHeight: 360,
-              background: colorBgContainer,
-            }}
-          >
-          <Navigation index={component} />
-          </div>
-        </Content>
-        <Footer
-          style={{
-            textAlign: 'center',
-          }}
-        >
-          @XPNS
-        </Footer>
-      </Layout>
-    </Layout>
+<Content style={{display:'flex',height:'40vh',gap:'2rem',padding:'1rem', justifyContent:'space-around' ,  alignContent: 'stretch',backgroundColor:'red'}}><div style={{'backgroundColor':'blue','flexGrow':3}}>KPIs</div> <div style={{'backgroundColor':'cyan','flexGrow':1}}>Action</div> </Content>
+<Content style={{display:'flex',height:'40vh',gap:'2rem',padding:'1rem', justifyContent:'space-around' ,  alignContent: 'stretch',backgroundColor:'green'}}><div style={{'backgroundColor':'grey','flexGrow':3}}>Time-series</div> </Content>
+{/* <Content></Content> */}
+     <App/>
+</Layout>
   );
 };
 

@@ -12,7 +12,7 @@ import { Counter } from './Counter';
 // import React from "react";
 import styled from "styled-components";
 import { keyframes } from "styled-components";
-import { ProgressBarComponent }  from '@syncfusion/ej2-react-progressbar';
+// import { ProgressBarComponent }  from '@syncfusion/ej2-react-progressbar';
 
 
 /**

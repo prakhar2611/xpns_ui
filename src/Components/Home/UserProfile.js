@@ -53,7 +53,7 @@ function UserProfile() {
     const navigate  = useNavigate ();
     
     var token = sessionStorage.getItem('access_token');
-    axios.get('https://teencross.dev/api/User/v1/GetUserProfile',{
+    axios.get('http://192.168.1.5:9005/api/User/v1/GetUserProfile',{
         headers: {           
             'Content-Type': 'application/json',
             'token' :  token

@@ -16,6 +16,7 @@ import { SignIn } from './Components/GoogleSingIn/SignIn';
 import { LayoutPage } from './Page/Home/LayoutPage';
 import {Y2s} from './Page/Home/Y2s'
 import { Counter } from './Page/Home/Counter.js';
+import { HomePage } from './HomeV2/homepage.jsx';
 
 const router = createBrowserRouter([
   {
@@ -42,6 +43,10 @@ const router = createBrowserRouter([
   {
     path : "/counter",
     element : <Counter />
+  },
+  {
+    path : "/birdie",
+    element : <HomePage />
   }
 ]);
 
