@@ -4,8 +4,8 @@ import { Layout, Menu, theme, Box } from 'antd';
 // import { Navigation } from './Navigation';
 import { AppstoreOutlined, MailOutlined, SettingOutlined } from '@ant-design/icons';
 import {'App' as App} from './Infiniter.jsx';
+import {'LineChart' as LineChart} from './LieChart.jsx';
 const { Header, Content, Footer, Sider } = Layout;
-
 
 
 const items = [
@@ -106,10 +106,27 @@ export const HomePage = () => {
         >
 <Menu onClick={onClick} selectedKeys={[current]} mode="horizontal" items={items} />        
 </Header>
-<Content style={{display:'flex',height:'40vh',gap:'2rem',padding:'1rem', justifyContent:'space-around' ,  alignContent: 'stretch',backgroundColor:'red'}}><div style={{'backgroundColor':'blue','flexGrow':3}}>KPIs</div> <div style={{'backgroundColor':'cyan','flexGrow':1}}>Action</div> </Content>
-<Content style={{display:'flex',height:'40vh',gap:'2rem',padding:'1rem', justifyContent:'space-around' ,  alignContent: 'stretch',backgroundColor:'green'}}><div style={{'backgroundColor':'grey','flexGrow':3}}>Time-series</div> </Content>
+<Content style={{display:'flex',height:'40vh',gap:'2rem',padding:'1rem',
+                 justifyContent:'space-around' ,  alignContent: 'stretch',backgroundColor:'red'}}>
+                  
+    <div style={{'backgroundColor':'blue','flexGrow':3}}>KPIs
+    </div> 
+
+    <div style={{'backgroundColor':'cyan','flexGrow':1}}>Action
+    </div> 
+</Content>
+
+
+<Content style={{display:'flex',height:'40vh',gap:'2rem',padding:'1rem', 
+                justifyContent:'space-around' ,  alignContent: 'stretch',backgroundColor:'green'}}>
+  
+  <div style={{'backgroundColor':'white','display':'flex','flexGrow':3}}>
+    
+    <LineChart/>
+  </div> 
+</Content>
 {/* <Content></Content> */}
-     <App/>
+<App/>
 </Layout>
   );
 };
