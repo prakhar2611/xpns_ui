@@ -46,7 +46,7 @@ export function DataGrid({isfetched,data}) {
             'data' : payload
         }
         console.log("update payload :",p);
-        axios.post('https://teencross.dev/expense/api/v1/Update', JSON.stringify(p),{
+        axios.post('http://192.168.1.5:9005/expense/api/v1/Update', JSON.stringify(p),{
             headers: {
                 'Content-Type': 'application/json',
                 'token' :  token
