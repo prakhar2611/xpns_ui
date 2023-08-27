@@ -1,9 +1,9 @@
 import React ,{useState} from 'react';
 import "./homepage.css"
-import { Layout, Menu, theme, Box } from 'antd';
+import { Layout, Menu, theme, Box ,Tooltip} from 'antd';
 // import { Navigation } from './Navigation';
 import { Navigation } from '../Page/Home/Navigation.js'
-import { AppstoreOutlined,ArrowUpOutlined,ArrowDownOutlined ,MailOutlined, SettingOutlined } from '@ant-design/icons';
+import { AppstoreOutlined,ArrowUpOutlined,ArrowDownOutlined,InfoCircleOutlined ,MailOutlined, SettingOutlined } from '@ant-design/icons';
 import {useNavigate} from "react-router-dom";
 
 import {ArrrowIcon, FaceIcon, ImageIcon, SunIcon } from '@radix-ui/react-icons'
@@ -134,30 +134,35 @@ export const HomePage = () => {
     <div className="container">
       <div  >
           <Flex className="tile1"> 
-            <Heading  mb="1"  size="8">This Month</Heading> 
+            <span><Heading  mb="1"  size="8">This Month <Tooltip title="summary of this month"> <InfoCircleOutlined style={{'fontSize':'16px'}}/></Tooltip></Heading></span>
             <Separator horizontal="vertical" size="5" mb="3"/>
             <Flex gap="7">
               <div >
               <span>
                 <Text color='#ffaaff' size="9" mb="2" weight="medium"  > {dashboard.thisMonth}</Text>
               {/* <svg width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7.5 2C7.77614 2 8 2.22386 8 2.5L8 11.2929L11.1464 8.14645C11.3417 7.95118 11.6583 7.95118 11.8536 8.14645C12.0488 8.34171 12.0488 8.65829 11.8536 8.85355L7.85355 12.8536C7.75979 12.9473 7.63261 13 7.5 13C7.36739 13 7.24021 12.9473 7.14645 12.8536L3.14645 8.85355C2.95118 8.65829 2.95118 8.34171 3.14645 8.14645C3.34171 7.95118 3.65829 7.95118 3.85355 8.14645L7 11.2929L7 2.5C7 2.22386 7.22386 2 7.5 2Z" fill="currentColor" fill-rule="evenodd" clip-rule="evenodd"></path></svg> */}
-              <ArrowUpOutlined style={{ fontSize: '26px', color: '#aa0000' }}/>
-              <ArrowDownOutlined style={{ fontSize: '26px', color: '#55aa44' }} />
-              </span><br/>
+              {/* <ArrowUpOutlined style={{ fontSize: '26px', color: '#aa0000' }}/> */}
+              </span>
+              <br/>
               <Text >
-                <Em> {dashboard.difference}% up </Em> from 
+              
+                <Em> {Math.abs(dashboard.difference)}%  </Em> <ArrowDownOutlined style={{ fontSize: '26px', color: '#55aa44' }} /> from 
                 <Strong> last month </Strong> 
+              <Tooltip title="comparing the last month at the same time"> <InfoCircleOutlined style={{'fontSize':'.6rem'}}/></Tooltip>
               </Text>
               </div>
               <Separator orientation="vertical" size="4" />
               <div>
-                <span><Text color='#ffaaff' size="9" mb="2" weight="medium"  > {dashboard.count}</Text>
+                <span><Text color='#ffaaff' size="9" mb="2" weight="medium"  > {dashboard.count} </Text>
+                {/* <Text><Em> {Math.abs(dashboard.difference)}%  </Em> <ArrowDownOutlined style={{ fontSize: '26px', color: '#55aa44' }} /></Text> */}
+                
               {/* <svg width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7.5 2C7.77614 2 8 2.22386 8 2.5L8 11.2929L11.1464 8.14645C11.3417 7.95118 11.6583 7.95118 11.8536 8.14645C12.0488 8.34171 12.0488 8.65829 11.8536 8.85355L7.85355 12.8536C7.75979 12.9473 7.63261 13 7.5 13C7.36739 13 7.24021 12.9473 7.14645 12.8536L3.14645 8.85355C2.95118 8.65829 2.95118 8.34171 3.14645 8.14645C3.34171 7.95118 3.65829 7.95118 3.85355 8.14645L7 11.2929L7 2.5C7 2.22386 7.22386 2 7.5 2Z" fill="currentColor" fill-rule="evenodd" clip-rule="evenodd"></path></svg> */}
               {/* <ArrowUpOutlined style={{ fontSize: '26px', color: '#aa0000' }}/> */}
               {/* <ArrowDownOutlined style={{ fontSize: '26px', color: '#55aa44' }} /> */}
               </span><br/>
               <Text >
-                transactions recorded
+                transactions recorded  
+              <Tooltip title="transactions fetched from email"> <InfoCircleOutlined style={{'fontSize':'.6rem'}}/></Tooltip>
               </Text>
               </div>
               <Separator orientation="vertical" size="4" />
@@ -171,7 +176,10 @@ export const HomePage = () => {
                 <Em>
                   un-labelled  
                   </Em> transactions!
+                  <Tooltip title="labels are autoassigned to VPAs based past inputs"> <InfoCircleOutlined style={{'fontSize':'.6rem'}}/></Tooltip>
               </Text>
+              
+
               </div>
               
              </Flex>
