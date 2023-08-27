@@ -1,6 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
+import '@radix-ui/themes/styles.css';
+
 import store from './Utils/store';
 import { Provider } from 'react-redux'
 import reportWebVitals from './reportWebVitals';

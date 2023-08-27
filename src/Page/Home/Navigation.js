@@ -6,6 +6,7 @@ import { FetchRaw } from '../../Components/Home/FetchComponent';
 import { FetchByVPA } from '../../Components/Home/FetchByVPA';
 //import {Sync } from '../../Components/Home/Sync'
 
+
 export function Navigation({index}) {
   const [componet,setcomponent] = useState(0)
     if(index == 1 ) {

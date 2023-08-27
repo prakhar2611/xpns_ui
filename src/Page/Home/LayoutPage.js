@@ -70,7 +70,7 @@ const containerStyle = {
 
 
 export const LayoutPage = () => {
-  const [component,setcomponent] = useState(1)
+  const [component,setcomponent] = useState(4)
   const [current, setCurrent] = useState('mail');
 
 

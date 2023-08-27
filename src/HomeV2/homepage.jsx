@@ -2,10 +2,18 @@ import React ,{useState} from 'react';
 import "./homepage.css"
 import { Layout, Menu, theme, Box } from 'antd';
 // import { Navigation } from './Navigation';
-import { AppstoreOutlined, MailOutlined, SettingOutlined } from '@ant-design/icons';
+import { Navigation } from '../Page/Home/Navigation.js'
+import { AppstoreOutlined,ArrowUpOutlined,ArrowDownOutlined ,MailOutlined, SettingOutlined } from '@ant-design/icons';
+import {useNavigate} from "react-router-dom";
+
+import {ArrrowIcon, FaceIcon, ImageIcon, SunIcon } from '@radix-ui/react-icons'
 import {'App' as App} from './Infiniter.jsx';
 import {'LineChart' as LineChart} from './LieChart.jsx';
+import { Theme ,ThemePanel} from '@radix-ui/themes';
+import { Flex,Text,Button,Heading ,Em,Strong,Separator} from '@radix-ui/themes';
+
 const { Header, Content, Footer, Sider } = Layout;
+
 
 
 const items = [
@@ -72,7 +80,17 @@ const containerStyle = {
 export const HomePage = () => {
   const [component,setcomponent] = useState(1)
   const [current, setCurrent] = useState('mail');
+  const [dashboard, setDashboard] = useState({thisMonth:32453,difference:-1.2,count:42,labelled:13});
+  const [topVPA,setTopVpa] = useState({
+                                      vpa:{"swiggy":{"label":null,"amt":7583},
+                                            "ola":{"label":null,"amt":2031}
+                                          }})
+  const navigate  = useNavigate ();
 
+
+  function navigateLayout() {
+    navigate('/layout')
+  }
 
   const onClick = (e) => {
     console.log('click ', e);
@@ -95,29 +113,88 @@ export const HomePage = () => {
     token: { colorBgContainer },
   } = theme.useToken();
   
+
+  
+
   return (
     
     <Layout>
+      <Theme>
      <Header style={{
             padding: 0,
             // background: "#2B4B55",
             // color : "#2B4B55"
           }}
         >
-<Menu onClick={onClick} selectedKeys={[current]} mode="horizontal" items={items} />        
-</Header>
-<Content style={{display:'flex',height:'40vh',gap:'2rem',padding:'1rem',
-                 justifyContent:'space-around' ,  alignContent: 'stretch',backgroundColor:'teal'}}>
+{/* <Menu onClick={onClick} selectedKeys={[current]} mode="horizontal" items={items} />         */}
+    </Header>
+    <Content style={{display:'flex',height:'40vh',gap:'2rem',padding:'1rem',
+                    justifyContent:'space-around' ,  alignContent: 'stretch',backgroundColor:'teal'}}>
     
     <div className="container">
-      <div >
-
-        <div className="kpis" >
-          35,200
-        </div>
-        <div  className="kpis">
-            2
-        </div>
+      <div  >
+          <Flex className="tile1"> 
+            <Heading  mb="1"  size="8">This Month</Heading> 
+            <Separator horizontal="vertical" size="5" mb="3"/>
+            <Flex gap="7">
+              <div >
+              <span>
+                <Text color='#ffaaff' size="9" mb="2" weight="medium"  > {dashboard.thisMonth}</Text>
+              {/* <svg width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7.5 2C7.77614 2 8 2.22386 8 2.5L8 11.2929L11.1464 8.14645C11.3417 7.95118 11.6583 7.95118 11.8536 8.14645C12.0488 8.34171 12.0488 8.65829 11.8536 8.85355L7.85355 12.8536C7.75979 12.9473 7.63261 13 7.5 13C7.36739 13 7.24021 12.9473 7.14645 12.8536L3.14645 8.85355C2.95118 8.65829 2.95118 8.34171 3.14645 8.14645C3.34171 7.95118 3.65829 7.95118 3.85355 8.14645L7 11.2929L7 2.5C7 2.22386 7.22386 2 7.5 2Z" fill="currentColor" fill-rule="evenodd" clip-rule="evenodd"></path></svg> */}
+              <ArrowUpOutlined style={{ fontSize: '26px', color: '#aa0000' }}/>
+              <ArrowDownOutlined style={{ fontSize: '26px', color: '#55aa44' }} />
+              </span><br/>
+              <Text >
+                <Em> {dashboard.difference}% up </Em> from 
+                <Strong> last month </Strong> 
+              </Text>
+              </div>
+              <Separator orientation="vertical" size="4" />
+              <div>
+                <span><Text color='#ffaaff' size="9" mb="2" weight="medium"  > {dashboard.count}</Text>
+              {/* <svg width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7.5 2C7.77614 2 8 2.22386 8 2.5L8 11.2929L11.1464 8.14645C11.3417 7.95118 11.6583 7.95118 11.8536 8.14645C12.0488 8.34171 12.0488 8.65829 11.8536 8.85355L7.85355 12.8536C7.75979 12.9473 7.63261 13 7.5 13C7.36739 13 7.24021 12.9473 7.14645 12.8536L3.14645 8.85355C2.95118 8.65829 2.95118 8.34171 3.14645 8.14645C3.34171 7.95118 3.65829 7.95118 3.85355 8.14645L7 11.2929L7 2.5C7 2.22386 7.22386 2 7.5 2Z" fill="currentColor" fill-rule="evenodd" clip-rule="evenodd"></path></svg> */}
+              {/* <ArrowUpOutlined style={{ fontSize: '26px', color: '#aa0000' }}/> */}
+              {/* <ArrowDownOutlined style={{ fontSize: '26px', color: '#55aa44' }} /> */}
+              </span><br/>
+              <Text >
+                transactions recorded
+              </Text>
+              </div>
+              <Separator orientation="vertical" size="4" />
+              <div>
+                <span><Text color='red' size="9" mb="2" weight="medium"  > {dashboard.count- dashboard.labelled}</Text>
+              {/* <svg width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7.5 2C7.77614 2 8 2.22386 8 2.5L8 11.2929L11.1464 8.14645C11.3417 7.95118 11.6583 7.95118 11.8536 8.14645C12.0488 8.34171 12.0488 8.65829 11.8536 8.85355L7.85355 12.8536C7.75979 12.9473 7.63261 13 7.5 13C7.36739 13 7.24021 12.9473 7.14645 12.8536L3.14645 8.85355C2.95118 8.65829 2.95118 8.34171 3.14645 8.14645C3.34171 7.95118 3.65829 7.95118 3.85355 8.14645L7 11.2929L7 2.5C7 2.22386 7.22386 2 7.5 2Z" fill="currentColor" fill-rule="evenodd" clip-rule="evenodd"></path></svg> */}
+              {/* <ArrowUpOutlined style={{ fontSize: '26px', color: '#aa0000' }}/> */}
+              {/* <ArrowDownOutlined style={{ fontSize: '26px', color: '#55aa44' }} /> */}
+              </span><br/>
+              <Text >
+                <Em>
+                  un-labelled  
+                  </Em> transactions!
+              </Text>
+              </div>
+              
+             </Flex>
+     
+          </Flex>
+      
+        <Flex  className="tile2">
+          <Heading  mb="1"  size="8">Highlights </Heading> 
+          <Separator horizontal="horizontal" size="5" mb="3"/>
+          <ul>
+            <li>
+              <span>Swiggy</span>
+              <span>{topVPA.vpa.swiggy.label} </span>
+              <span>{topVPA.vpa.swiggy.amt} </span>
+              </li>
+            <li>
+              <span>ola</span>
+              <span>{topVPA.vpa.ola.label} </span>
+              <span>{topVPA.vpa.ola.amt} </span>
+              </li>
+              </ul>
+            
+        </Flex>
 
       </div>
       <div>
@@ -131,21 +208,35 @@ export const HomePage = () => {
       </div>
     </div> 
 
-    <div style={{'backgroundColor':'cyan','flexGrow':1}}>Action
+    <div className ="action" >
+      <Button> 
+        Sync
+      </Button>
+      <Button onClick={navigateLayout}> 
+        Configure
+      </Button>
+      <Button> 
+        Review
+      </Button>
+      
+      
     </div> 
 </Content>
 
 
-<Content style={{display:'flex',height:'40vh',gap:'2rem',padding:'1rem', 
-                justifyContent:'space-around' ,  alignContent: 'stretch',backgroundColor:'green'}}>
+<Content className="container2">
   
-  <div style={{'backgroundColor':'white','display':'flex','flexGrow':3}}>
-    <LineChart  />
+  <div style={{'backgroundColor':'white','display':'flex','flex':'1'}}>
+    <LineChart style={{'width':'100%'}} />
     
   </div> 
 </Content>
-{/* <Content></Content> */}
-<App/>
+<Content className="container3"> 
+  {/* <App/> */}
+  <Navigation index={2} />
+</Content>
+{/* <ThemePanel /> */}
+</Theme>
 </Layout>
   );
 };
