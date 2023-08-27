@@ -1,5 +1,5 @@
 import React ,{useState} from 'react';
-// import "../SignInLanding.css"
+import "./homepage.css"
 import { Layout, Menu, theme, Box } from 'antd';
 // import { Navigation } from './Navigation';
 import { AppstoreOutlined, MailOutlined, SettingOutlined } from '@ant-design/icons';
@@ -107,9 +107,28 @@ export const HomePage = () => {
 <Menu onClick={onClick} selectedKeys={[current]} mode="horizontal" items={items} />        
 </Header>
 <Content style={{display:'flex',height:'40vh',gap:'2rem',padding:'1rem',
-                 justifyContent:'space-around' ,  alignContent: 'stretch',backgroundColor:'red'}}>
-                  
-    <div style={{'backgroundColor':'blue','flexGrow':3}}>KPIs
+                 justifyContent:'space-around' ,  alignContent: 'stretch',backgroundColor:'teal'}}>
+    
+    <div className="container">
+      <div >
+
+        <div className="kpis" >
+          35,200
+        </div>
+        <div  className="kpis">
+            2
+        </div>
+
+      </div>
+      <div>
+        <div className="kpis">
+            3
+        </div>
+        <div className="kpis">
+            4
+        </div>
+
+      </div>
     </div> 
 
     <div style={{'backgroundColor':'cyan','flexGrow':1}}>Action
@@ -121,8 +140,8 @@ export const HomePage = () => {
                 justifyContent:'space-around' ,  alignContent: 'stretch',backgroundColor:'green'}}>
   
   <div style={{'backgroundColor':'white','display':'flex','flexGrow':3}}>
+    <LineChart  />
     
-    <LineChart/>
   </div> 
 </Content>
 {/* <Content></Content> */}

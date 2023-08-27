@@ -1,0 +1,40 @@
+
+.container {display:flex;
+            flex-wrap: wrap;
+            
+            /* gap:.5rem; */
+            /* padding:.2rem; */
+            justify-content:space-around ;
+            flex-direction:column;
+            /* align-content: stretch; */
+            background-color:teal;
+            flex-grow:2;
+            overflow: auto;
+}
+
+.container > div  {
+    /* flex: 50%;  */
+    /* or - flex: 0 50% - or - flex-basis: 50% - */
+    /*demo*/
+    display:flex;
+    flex-wrap: wrap;
+    gap:2rem;
+    padding:2rem;
+    justify-content:space-around ;
+    flex-direction:row;
+    /* align-content: stretch; */
+    background-color: tan;
+    box-shadow: 1 0 0 10px rgb(216, 38, 38);
+    /* box-shadow: 0 ; */
+    /* margin-bottom: 10px; */
+    /* width: 95%; */
+  }
+
+.kpis {
+    background:brown;
+    font-size:28px;
+    flex:1;
+
+    /* width: 5000px; */
+}
+    
